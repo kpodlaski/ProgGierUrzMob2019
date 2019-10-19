@@ -35,7 +35,6 @@ function draw_scene(){
     offscreen.width = canvas.width;
     offscreen.height = canvas.height;
     offctx = offscreen.getContext("2d"); 
-    offctx.clearRect(0,0,canvas.width, canvas.height);
     // Narysowanie kształtu
     offctx.fillStyle = '#12e3e5';
     offctx.fillRect(12,35,60,45);
@@ -54,18 +53,26 @@ function draw_scene(){
     offctx.translate(-rot_x, -rot_y);
     offctx.drawImage(img, eagle.x, eagle.y, eagle.w,eagle.h);
     offctx.restore();
+    ctx.clearRect(0,0,canvas.width, canvas.height);
     ctx.drawImage(offscreen,0,0,canvas.width,canvas.height);
+    window.requestAnimationFrame(draw_scene);
 }
 
 function rotateRight(){
     angle+=1;
-    draw_scene();
+    //draw_scene();
 }
 
 var interval = "";
 
 function startAnimation(){
     interval = window.setInterval(rotateRight,20);
+    interval2 = window.setInterval(
+        function (){
+            eagle.x = (eagle.x+1)%canvas.width;
+        },
+        50
+    );
 }
 
 function stopAnimation(){
