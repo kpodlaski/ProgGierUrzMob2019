@@ -21,6 +21,10 @@ stopButton.addEventListener('click',startAnimation);
 img = new Image();
 img.src = "eagle.jpg";
 
+bimg = new Image();
+bimg.src = "bird.jpg";
+
+
 eagle = {
     x:100,
     y:220,
@@ -29,7 +33,7 @@ eagle = {
 }
 
 angle = 0;
-
+var ramkaStart = 0;
 function draw_scene(){
     offscreen = document.createElement("canvas");
     offscreen.width = canvas.width;
@@ -50,8 +54,12 @@ function draw_scene(){
     console.log(rot_x+ " "+rot_y) 
     offctx.translate(rot_x, rot_y);
     offctx.rotate(angle/180*3.14);
+    offctx.scale(-1,1); //odbicie w osi x
     offctx.translate(-rot_x, -rot_y);
     offctx.drawImage(img, eagle.x, eagle.y, eagle.w,eagle.h);
+    offctx.drawImage(bimg, 
+        ramkaStart,0,200,274,
+        eagle.x, eagle.y+100, eagle.w,eagle.h);
     offctx.restore();
     ctx.clearRect(0,0,canvas.width, canvas.height);
     ctx.drawImage(offscreen,0,0,canvas.width,canvas.height);
@@ -66,10 +74,11 @@ function rotateRight(){
 var interval = "";
 
 function startAnimation(){
-    interval = window.setInterval(rotateRight,20);
+    //interval = window.setInterval(rotateRight,20);
     interval2 = window.setInterval(
         function (){
             eagle.x = (eagle.x+1)%canvas.width;
+            ramkaStart= (ramkaStart+200)%800;
         },
         50
     );
