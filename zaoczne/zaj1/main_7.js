@@ -31,25 +31,30 @@ eagle = {
 angle = 0;
 
 function draw_scene(){
-    ctx.clearRect(0,0,canvas.width, canvas.height);
+    offscreen = document.createElement("canvas");
+    offscreen.width = canvas.width;
+    offscreen.height = canvas.height;
+    offctx = offscreen.getContext("2d"); 
+    offctx.clearRect(0,0,canvas.width, canvas.height);
     // Narysowanie kształtu
-    ctx.fillStyle = '#12e3e5';
-    ctx.fillRect(12,35,60,45);
+    offctx.fillStyle = '#12e3e5';
+    offctx.fillRect(12,35,60,45);
     //Napisanie tekstu na Kanwie
-    ctx.font = "60px Times Roman";
-    ctx.fillText("Tekst na Kanwie", 15, 145);
-    ctx.lineWidth = 4;
+    offctx.font = "60px Times Roman";
+    offctx.fillText("Tekst na Kanwie", 15, 145);
+    offctx.lineWidth = 4;
     rot_x = eagle.x+eagle.w/2;
     rot_y = eagle.y+eagle.h/2;
-    ctx.strokeStyle= '#fa1590';
-    ctx.strokeText("Something else",15, 200);
-    ctx.save();
+    offctx.strokeStyle= '#fa1590';
+    offctx.strokeText("Something else",15, 200);
+    offctx.save();
     console.log(rot_x+ " "+rot_y) 
-    ctx.translate(rot_x, rot_y);
-    ctx.rotate(angle/180*3.14);
-    ctx.translate(-rot_x, -rot_y);
-    ctx.drawImage(img, eagle.x, eagle.y, eagle.w,eagle.h);
-    ctx.restore();
+    offctx.translate(rot_x, rot_y);
+    offctx.rotate(angle/180*3.14);
+    offctx.translate(-rot_x, -rot_y);
+    offctx.drawImage(img, eagle.x, eagle.y, eagle.w,eagle.h);
+    offctx.restore();
+    ctx.drawImage(offscreen,0,0,canvas.width,canvas.height);
 }
 
 function rotateRight(){
@@ -60,7 +65,7 @@ function rotateRight(){
 var interval = "";
 
 function startAnimation(){
-    interval = window.setInterval(rotateRight,1);
+    interval = window.setInterval(rotateRight,20);
 }
 
 function stopAnimation(){
