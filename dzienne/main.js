@@ -1,3 +1,5 @@
+var canvas = document.getElementById('mycanvas');
+var ctx = canvas.getContext('2d');
 
 kulka = {
     x:50,
@@ -7,6 +9,10 @@ kulka = {
     vy:4,
 }
 
+vjoy = {
+    x: 50,
+    y: 450,
+}
 function drawVJoy(ctx){
     joyX = 50;
     joyY = 450;
@@ -14,18 +20,22 @@ function drawVJoy(ctx){
     ctx.beginPath();
     ctx.ellipse(joyX,joyY,50,50,1,0,2*Math.PI)
     ctx.stroke();
+    ctx.fillStyle="#00fafa"; 
+    ctx.beginPath();
+    ctx.ellipse(vjoy.x,vjoy.y,5,5,1,0,2*Math.PI)
+    ctx.fill();
     ctx.fillStyle="#000000"; 
     ctx.beginPath();
     ctx.ellipse(joyX,joyY,5,5,1,0,2*Math.PI)
     ctx.fill();
+    
 }
 
 // https://github.com/kpodlaski/
 //Repo: ProgGierUrzMob2019
 //Podkatalog dzienne
 function animation(){
-    var canvas = document.getElementById('mycanvas');
-    var ctx = canvas.getContext('2d');
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.fillStyle = 'red';
     ctx.beginPath();
@@ -45,8 +55,17 @@ function animation(){
         kulka.y=canvas.height-kulka.r; 
         kulka.vy=-kulka.vy 
     }
-    console.log(kulka.x, kulka.y, kulka.r);
+    //console.log(kulka.x, kulka.y, kulka.r);
     setTimeout(animation,40);
 }
 
 animation();
+
+canvas.addEventListener('click', klik);
+
+function klik(ev){
+    console.log('klik');
+    console.log(ev.pageX);
+    vjoy.x = ev.pageX;
+    vjoy.y = ev.pageY;
+}
