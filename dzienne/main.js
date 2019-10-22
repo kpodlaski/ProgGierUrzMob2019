@@ -35,7 +35,7 @@ function animation(){
     drawVJoy(ctx);
     kulka.x+=kulka.vx;
     kulka.y+=kulka.vy;
-    if (kulka.x<=0) {kulka.x=0; kulka.vx=-kula.vx }
+    if (kulka.x<=0) {kulka.x=0; kulka.vx=-kulka.vx }
     if (kulka.x>=canvas.width) {
         kulka.x=canvas.width; 
         kulka.vx=-kulka.vx
