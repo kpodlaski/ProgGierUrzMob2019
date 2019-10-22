@@ -3,8 +3,8 @@ kulka = {
     x:50,
     y:50,
     r:15,
-    vx:1,
-    vy:1,
+    vx:5,
+    vy:4,
 }
 
 function drawVJoy(ctx){
@@ -35,14 +35,14 @@ function animation(){
     drawVJoy(ctx);
     kulka.x+=kulka.vx;
     kulka.y+=kulka.vy;
-    if (kulka.x<=0) {kulka.x=0; kulka.vx=-kulka.vx }
-    if (kulka.x>=canvas.width) {
-        kulka.x=canvas.width; 
+    if (kulka.x-kulka.r<=0) {kulka.x=kulka.r; kulka.vx=-kulka.vx }
+    if (kulka.x+kulka.r>=canvas.width) {
+        kulka.x=canvas.width-kulka.r; 
         kulka.vx=-kulka.vx
     }
-    if (kulka.y<=0) {kulka.y=0; kulka.vy=-kulka.vy; }
-    if (kulka.y>=canvas.height) {
-        kulka.y=canvas.height; 
+    if (kulka.y-kulka.r<=0) {kulka.y=kulka.r; kulka.vy=-kulka.vy; }
+    if (kulka.y+kulka.r>=canvas.height) {
+        kulka.y=canvas.height-kulka.r; 
         kulka.vy=-kulka.vy 
     }
     console.log(kulka.x, kulka.y, kulka.r);
