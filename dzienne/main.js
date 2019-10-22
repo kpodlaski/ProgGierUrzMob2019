@@ -7,6 +7,19 @@ kulka = {
     vy:1,
 }
 
+function drawVJoy(ctx){
+    joyX = 50;
+    joyY = 450;
+    ctx.strokeStyle="#aaaa00"; 
+    ctx.beginPath();
+    ctx.ellipse(joyX,joyY,50,50,1,0,2*Math.PI)
+    ctx.stroke();
+    ctx.fillStyle="#000000"; 
+    ctx.beginPath();
+    ctx.ellipse(joyX,joyY,5,5,1,0,2*Math.PI)
+    ctx.fill();
+}
+
 // https://github.com/kpodlaski/
 //Repo: ProgGierUrzMob2019
 //Podkatalog dzienne
@@ -19,6 +32,7 @@ function animation(){
     ctx.ellipse(kulka.x, kulka.y, 2*kulka.r, 2*kulka.r, 
         Math.PI * .25, 0, 2*Math.PI);
     ctx.fill();
+    drawVJoy(ctx);
     kulka.x+=kulka.vx;
     kulka.y+=kulka.vy;
     if (kulka.x<=0) {kulka.x=0; kulka.vx=-kula.vx }
