@@ -11,13 +11,16 @@ class GameObject{
     }
 
     update(){
+        /*
         this.x+=this.vx;
         this.y+=this.vy;
         setTimeout(this.update,this.timeout);
+        */
+        console.log("GameObject update");
     }
 
     draw(ctx){
-        ctx.drawImage(this.img, this.x, this.y);
+        //ctx.drawImage(this.img, this.x, this.y);
     }
     
 }

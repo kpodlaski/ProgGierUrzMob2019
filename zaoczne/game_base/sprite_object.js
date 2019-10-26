@@ -9,18 +9,23 @@ class SpriteObject extends GameObject{
     }
 
     update(){
-        this.frame = (frame+1)%this.no_of_frames; 
+        this.frame = (this.frame+1)%this.no_of_frames; 
         this.x+=this.vx;
         this.y+=this.vy;
-        setTimeout(this.update,this.timeout);
+        console.log("update sprite");
+        setTimeout(this.update.bind(this),this.timeout);
     }
 
     draw(ctx){
+        ctx.save();
+        //ctx.translate(100,100);
+        //ctx.scale(-1,1);
         ctx.drawImage(this.img,
             this.frame*this.img.width/this.no_of_frames,0,
             this.img.width/this.no_of_frames,this.img.height,
             this.x, this.y,
             this.w, this.h);
+        ctx.restore();
     }
     
 }

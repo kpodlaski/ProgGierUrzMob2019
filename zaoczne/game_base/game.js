@@ -2,17 +2,17 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 var bg1 = new BackgroundObject(
-    "obrazki/scrolling_background_sky_.png",
+    "obrazki/scrolling_background_sky.png",
     0,0, 40,
     canvas.width, canvas.height);
 
 var bg2 = new BackgroundObject(
-        "obrazki/scrolling_background_middle_.png",
+        "obrazki/scrolling_background_middle.png",
         0,0, 60,
         canvas.width, canvas.height);   
 
 var bg3 = new BackgroundObject(
-        "obrazki/scrolling_background_foreground_.png",
+        "obrazki/scrolling_background_foreground.png",
         0,0, 20,
         canvas.width, canvas.height);
 

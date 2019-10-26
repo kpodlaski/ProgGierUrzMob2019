@@ -12,8 +12,9 @@ class BackgroundObject extends GameObject{
         if (this.x<-this.canvas_width){
             this.x = 0;
         }
-        else  this.x+=this.vx;
-        setTimeout(this.update,this.timeout);
+        else  this.x-=this.vx;
+        console.log("update bground "+this.timeout);
+        setTimeout(this.update.bind(this),this.timeout);
     }
 
     draw(ctx){
