@@ -13,7 +13,7 @@ class BackgroundObject extends GameObject{
             this.x = 0;
         }
         else  this.x-=this.vx;
-        console.log("update bground "+this.timeout);
+        //console.log("update bground "+this.timeout);
         setTimeout(this.update.bind(this),this.timeout);
     }
 

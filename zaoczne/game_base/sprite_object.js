@@ -12,7 +12,7 @@ class SpriteObject extends GameObject{
         this.frame = (this.frame+1)%this.no_of_frames; 
         this.x+=this.vx;
         this.y+=this.vy;
-        console.log("update sprite");
+        //console.log("update sprite");
         setTimeout(this.update.bind(this),this.timeout);
     }
 

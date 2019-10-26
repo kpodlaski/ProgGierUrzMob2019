@@ -22,6 +22,8 @@ var eagle = new SpriteObject(
 
 var game_objects = [ bg1, bg2, bg3, eagle];
 
+ramka = 0;
+
 function animation(){
     offscreen = document.createElement("canvas");
     offscreen.width = canvas.width;
@@ -30,8 +32,24 @@ function animation(){
     for (i=0; i< game_objects.length; i++){
         game_objects[i].draw(offctx);
     }
+    let imData = offctx.getImageData(0,0,canvas.width,canvas.height);
+    //console.log(imData);
+    for(pixel = 0; pixel<imData.data.length;pixel+=4){
+        c = imData.data[pixel] + imData.data[pixel+1] 
+            + imData.data[pixel+2];
+        c = c/3;
+        imData.data[pixel] = imData.data[pixel] + 
+                        (c-imData.data[pixel])/1000*ramka;
+        imData.data[pixel+1] = imData.data[pixel+1] + 
+                        (c-imData.data[pixel+1])/1000*ramka;
+        imData.data[pixel+2] = imData.data[pixel+2] + 
+                        (c-imData.data[pixel+2])/1000*ramka;
+    }
+    ramka = (ramka+1)%1000;
+    console.log(ramka);
     ctx.clearRect(0,0,canvas.width, canvas.height);
-    ctx.drawImage(offscreen,0,0,canvas.width,canvas.height);
+    ctx.putImageData(imData,0,0);
+    
     requestAnimationFrame(animation);
 }
 
