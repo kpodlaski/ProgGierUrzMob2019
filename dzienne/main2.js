@@ -9,33 +9,8 @@ kulka = {
     vy:4,
 }
 
-vjoy = {
-    x:  101,
-    y:  499,
-    R:  100,
-    X:  101,
-    Y:  499,
-
-}
-
-
-
-function drawVJoy(ctx){
-    ctx.strokeStyle="#aaaa00"; 
-    ctx.beginPath();
-    ctx.ellipse(vjoy.X,vjoy.Y,vjoy.R,vjoy.R,1,0,2*Math.PI)
-    ctx.stroke();
-    ctx.fillStyle="#00fafa"; 
-    ctx.beginPath();
-    ctx.ellipse(vjoy.x,vjoy.y,5,5,1,0,2*Math.PI)
-    ctx.fill();
-    ctx.fillStyle="#000000"; 
-    ctx.beginPath();
-    ctx.ellipse(vjoy.X,vjoy.Y,5,5,1,0,2*Math.PI)
-    ctx.fill();
+vjoy = new VJoy(100,500,100);
     
-}
-
 // https://github.com/kpodlaski/
 //Repo: ProgGierUrzMob2019
 //Podkatalog dzienne
@@ -47,7 +22,7 @@ function animation(){
     ctx.ellipse(kulka.x, kulka.y, 2*kulka.r, 2*kulka.r, 
         Math.PI * .25, 0, 2*Math.PI);
     ctx.fill();
-    drawVJoy(ctx);
+    vjoy.draw(ctx);
     kulka.x+=kulka.vx;
     kulka.y+=kulka.vy;
     if (kulka.x-kulka.r<=0) {kulka.x=kulka.r; kulka.vx=-kulka.vx }
@@ -66,7 +41,7 @@ function animation(){
 
 animation();
 
-canvas.addEventListener('click', click);
+canvas.addEventListener('click', vjoy.onclick.bind(vjoy));
 //For mobile Devices touch events are more important
 canvas.addEventListener('touchstart', function(){
     console.log("touch Start");
@@ -75,20 +50,3 @@ canvas.addEventListener('touchend', function(){
     console.log("touch end");
 });
 
-function click(ev){
-    console.log('klik');
-    console.log(ev.pageY);
-    dx = ev.pageX - vjoy.X;
-    dy = ev.pageY - vjoy.Y;
-    console.log(dx,dy)
-    console.log(dx*dx+dy*dy)
-    console.log(vjoy.R*vjoy.R)
-    if (dx*dx+dy*dy<vjoy.R*vjoy.R){
-        vjoy.x = ev.pageX;
-        vjoy.y = ev.pageY;
-        console.log("Proper klick");
-        kulka.vx=10*dx/vjoy.R;
-        kulka.vy=10*dy/vjoy.R;
-    }
-
-}
