@@ -15,10 +15,10 @@ class SpriteObject extends GameObject{
         setTimeout(this.update,this.timeout);
     }
 
-    draw(ctx, width, height){
+    draw(ctx){
         ctx.drawImage(this.img,
             this.frame*this.img.width/this.no_of_frames,0,
-            this.img.width/this.no_of_frames,this.img.width,
+            this.img.width/this.no_of_frames,this.img.height,
             this.x, this.y,
             this.w, this.h);
     }

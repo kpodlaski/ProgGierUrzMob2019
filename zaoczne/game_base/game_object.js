@@ -1,7 +1,8 @@
 class GameObject{
 
     constructor(img, x, y, timeout){
-        this.img = img;
+        this.img = new Image();
+        this.img.src = img;
         this.x = x;
         this.y=y;
         this.vx=0;
@@ -15,8 +16,8 @@ class GameObject{
         setTimeout(this.update,this.timeout);
     }
 
-    draw(ctx, width, height){
-        ctx.drawImage(this.img,0,0,width,height);
+    draw(ctx){
+        ctx.drawImage(this.img, this.x, this.y);
     }
     
 }

@@ -16,7 +16,7 @@ class BackgroundObject extends GameObject{
         setTimeout(this.update,this.timeout);
     }
 
-    draw(ctx, width, height){
+    draw(ctx){
         ctx.drawImage(this.img,this.x,0,
             this.canvas_width,this.canvas_height);
         ctx.drawImage(this.img, this.x+this.canvas_width, 
